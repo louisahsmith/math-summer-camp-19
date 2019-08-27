@@ -1,0 +1,15 @@
+Type: Compendium
+Package: Math summer camp
+Title: Provides materials for math review
+Version: 0.0.1
+Authors@R: 
+    person(given = "Louisa",
+           family = "Smith",
+           role = c("aut", "cre"),
+           email = "louisahsmith@gmail.com")
+Description: Materials for math review portion of PHS
+    summer camp
+License: MIT + file LICENSE
+Depends: 
+Encoding: UTF-8
+LazyData: true
