@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>PHS 2000 Summer Camp</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Louisa H. Smith" />
+    <meta name="date" content="2019-08-28" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/plotly-binding/plotly.js"></script>
+    <script src="libs/typedarray/typedarray.min.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
+    <link href="libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
+    <script src="libs/plotly-main/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# PHS 2000 Summer Camp
+## Math Review
+### Louisa H. Smith
+### 2019-08-28
+
+---
+
+class:middle,center
+
+
+&lt;style type="text/css"&gt;
+/* custom.css */
+.title-slide {
+  background-image: url("img/camp.svg");
+  background-size: cover;
+}
+
+.left-code {
+  #color: #777;
+  width: 43%;
+  height: 92%;
+  float: left;
+  #font-size: 0.8em;
+  position: absolute;
+}
+.right-plot {
+  width: 50%;
+  float: right;
+  padding-left: 5%;
+}
+.left-col {
+  width: 60%;
+  float: left;
+  position: absolute;
+}
+.right-col {
+  width: 30%;
+  float: right;
+  padding-left: 5%;
+}
+.plot-callout {
+  height: 225px;
+  width: 450px;
+  bottom: 5%;
+  right: 5%;
+  position: absolute;
+  padding: 0px;
+  z-index: 100;
+}
+.plot-callout img {
+  width: 100%;
+  border: 4px solid #23373B;
+}
+
+h4 {
+  color: #F97B64;
+  font-size: 22px;
+}
+
+h1, h2, h3, h4 {
+  margin-top:0;
+}
+
+.inverse h1, .inverse h2, .inverse h3 {
+  color: #1F4257;
+}
+.remark-slide thead, .remark-slide tr:nth-child(2n) {
+  background-color: white;
+}
+.title-slide, .title-slide h1, .title-slide h2, .title-slide h3 {
+color: #FFFFFF;
+}
+&lt;/style&gt;
+
+
+# Index card:
+
+## 1. How confident are you in your quantitative abilities?
+### 1 = no confidence, 5 = very confident
+
+---
+class: inverse, middle, center
+
+# How we read, store, represent data
+## Scalars, vectors, matrices
+
+---
+class:center
+.left[
+# Scalars, vectors, matrices
+]
+
+`\(a = a \text{ , a scalar}\)`
+
+&lt;br&gt;
+
+--
+
+`\(\mathbf{y} =\begin{bmatrix}y_1 \\ y_2 \\ \vdots \\ y_n\end{bmatrix}\text{,  a vector of length } n\)`
+
+&lt;br&gt;
+
+--
+
+`\(\mathbf{X} = \begin{bmatrix} x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1p} \\ x_{21} &amp; x_{22} &amp; \cdots &amp; x_{2p} \\ \vdots &amp;\vdots &amp; \ddots &amp; \vdots \\x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}\end{bmatrix} \text{,  an }n \times p \text{ matrix}\)`
+
+
+---
+### (Note on dimensions)
+.right-col[
+![](https://i3.cpcache.com/merchandise_zoom/206_550x550_Front_Color-NA.jpg?region={%22name%22:%22FrontCenter%22,%22width%22:20,%22height%22:12.18,%22alignment%22:%22MiddleCenter%22,%22orientation%22:0,%22dpi%22:150,%22crop_x%22:0,%22crop_y%22:0,%22crop_h%22:1800,%22crop_w%22:3000,%22scale%22:0,%22template%22:{%22id%22:16054111,%22params%22:{}}}&amp;Size=NA&amp;AttributeValue=NA)]
+
+.left-col[
+We read dimensions like `\(n \times p\)` as **rows** by **columns**.
+
+I remember this as **Rapid City** because I used to live in South Dakota. You may choose a mnemonic of your own!
+
+&lt;br&gt;
+
+**This is a 3 x 4 matrix:**
+
+`\(\mathbf{X}_{3 \times 4} = \begin{bmatrix} x_{11} &amp; x_{12} &amp; x_{13} &amp; x_{14}\\ x_{21} &amp; x_{22} &amp; x_{23} &amp; x_{24}\\ x_{31} &amp; x_{32} &amp; x_{33} &amp; x_{34} \end{bmatrix}_{3\times 4}\)`
+
+
+If it's not clear from the context, we may write the dimensions out explicitly as above.
+
+Individual elements are indexed in the same *row-column* order: `\(x_{23}\)` is the element in the second row and third column.
+]
+
+---
+# In "real life"
+.center[
+`\(a_{i} = 30, \text{ a single participant's age at baseline}\)`
+
+&lt;br&gt;
+
+`\(\mathbf{y} = \begin{bmatrix} 30 \\ 24 \\ \vdots \\ 46 \end{bmatrix} \text{,  ages at baseline of all the participants}\)`
+
+`\(\mathbf{X} = \begin{bmatrix} 30 &amp; 67 &amp; \cdots &amp; 1989 \\ 24 &amp; 63 &amp; \cdots &amp; 1995 \\ \vdots &amp;\vdots &amp; \ddots &amp; \vdots \\ 46 &amp; 72 &amp; \cdots &amp; 1973 \end{bmatrix}\)`
+
+`\(\text{values of all the variables (age at baseline, height in inches, ..., year of birth) for all participants}\)`
+]
+
+---
+# In R
+
+.center[
+
+```
+##       age height likes_dogs  yob
+##  [1,]  25     67          1 1994
+##  [2,]  38     63          1 1981
+##  [3,]  35     66          1 1984
+##  [4,]  36     70          1 1983
+##  [5,]  23     62          1 1996
+##  [6,]  26     73          1 1993
+##  [7,]  44     68          1 1975
+##  [8,]  23     70          1 1996
+##  [9,]  25     70          1 1994
+## [10,]  41     59          0 1978
+```
+
+#### What are the dimensions of this matrix?
+]
+
+---
+# Select a scalar
+
+```
+##       age height likes_dogs  yob
+##  [1,]  25     67          1 1994
+##  [2,]  38     63          1 1981
+##  [3,]  35     66          1 1984
+##  [4,]  36     70          1 1983
+##  [5,]  23     62          1 1996
+##  [6,]  26     73          1 1993
+##  [7,]  44     68          1 1975
+##  [8,]  23     70          1 1996
+##  [9,]  25     70          1 1994
+## [10,]  41     59          0 1978
+```
+Extract a single number from the data:
+
+```r
+# participant 3's year of birth (the 4th variable)
+dat[3, 4]
+```
+
+```
+##  yob 
+## 1984
+```
+What will `dat[5, 2]` produce? What about `dat[2, 5]`?
+
+---
+
+# Select a vector
+
+```
+##       age height likes_dogs  yob
+##  [1,]  25     67          1 1994
+##  [2,]  38     63          1 1981
+##  [3,]  35     66          1 1984
+##  [4,]  36     70          1 1983
+##  [5,]  23     62          1 1996
+##  [6,]  26     73          1 1993
+##  [7,]  44     68          1 1975
+##  [8,]  23     70          1 1996
+##  [9,]  25     70          1 1994
+## [10,]  41     59          0 1978
+```
+Extract a column from the data:
+
+```r
+# all participants' year of birth (the 4th variable)
+dat[, 4]
+```
+
+```
+##  [1] 1994 1981 1984 1983 1996 1993 1975 1996 1994 1978
+```
+
+---
+# Row vectors
+
+We can flip a vector on its side by **transposing** it.
+&lt;br&gt;
+&lt;br&gt;
+.center[
+`\(\mathbf{y} =\begin{bmatrix}y_1 \\ y_2 \\ \vdots \\ y_n\end{bmatrix}\text{,  a vector of length } n\)`
+
+`\(\mathbf{y}^T =\begin{bmatrix}y_1 &amp; y_2 &amp; \cdots &amp; y_n\end{bmatrix}\text{,  a row vector of length } n\)`
+]
+
+#### We may also refer to transposed vectors (and matrices) with "prime" notation: `\(\mathbf{y}^T = \mathbf{y}'\)`
+(Not to be confused with a derivative!)
+---
+
+# Select a row vector
+
+```
+##       age height likes_dogs  yob
+##  [1,]  25     67          1 1994
+##  [2,]  38     63          1 1981
+##  [3,]  35     66          1 1984
+##  [4,]  36     70          1 1983
+##  [5,]  23     62          1 1996
+##  [6,]  26     73          1 1993
+##  [7,]  44     68          1 1975
+##  [8,]  23     70          1 1996
+##  [9,]  25     70          1 1994
+## [10,]  41     59          0 1978
+```
+Extract a row from the data:
+
+```r
+# all information about participant 5
+dat[5, ]
+```
+
+```
+##        age     height likes_dogs        yob 
+##         23         62          1       1996
+```
+
+---
+## (Note on dimensions)
+
+We can also think of vectors as single-columned matrices:
+
+- A column vector `\(\mathbf{y}\)` of length `\(n\)` has dimensions `\(n \times 1\)`.
+.center[
+`\(\begin{bmatrix}y_1 \\ y_2 \\ \vdots \\ y_n\end{bmatrix}_{n\times 1}\)`
+]
+
+
+- A row vector `\(\mathbf{y}'\)`  of length `\(n\)` has dimensions `\(1 \times n\)`.
+.center[
+`\(\begin{bmatrix}y_1 &amp; y_2 &amp; \cdots &amp; y_n\end{bmatrix}_{1\times n}\)`
+]
+
+#### Thinking about vectors this way will be really handy when we multiply vectors and matrices!
+
+---
+
+# We can also transpose matrices
+&lt;br&gt;
+
+`\(\mathbf{X} = \begin{bmatrix} 30 &amp; 67 &amp; \cdots &amp; 1989 \\ 24 &amp; 63 &amp; \cdots &amp; 1995 \\ \vdots &amp;\vdots &amp; \ddots &amp; \vdots \\ 46 &amp; 72 &amp; \cdots &amp; 1973 \end{bmatrix}\qquad \qquad \qquad \qquad \mathbf{X}^T = \mathbf{X}' = \begin{bmatrix} 30 &amp; 24 &amp; \cdots &amp; 46 \\ 67 &amp; 63 &amp; \cdots &amp; 72 \\ \vdots &amp;\vdots &amp; \ddots &amp; \vdots \\ 1989 &amp; 1995 &amp; \cdots &amp; 1973 \end{bmatrix}\)`
+
+&lt;br&gt;
+&lt;br&gt;
+
+The former columns (variables) are now rows.
+
+The former rows (participants) are now columns.
+
+**This will be handy mathematically (but you probably wouldn't just do it to your dataset for fun!).**
+
+---
+# In R
+We can transpose a matrix using the `t()` function:
+
+```r
+t(dat)
+```
+
+```
+##            [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+## age          25   38   35   36   23   26   44   23   25    41
+## height       67   63   66   70   62   73   68   70   70    59
+## likes_dogs    1    1    1    1    1    1    1    1    1     0
+## yob        1994 1981 1984 1983 1996 1993 1975 1996 1994  1978
+```
+If we save this as another object, we can extract elements using the **opposite** indices as before:
+
+
+```r
+dat_t &lt;- t(dat)
+dat[3, 4] # participant 3's year of birth
+```
+
+```
+##  yob 
+## 1984
+```
+
+```r
+dat_t[4, 3]
+```
+
+```
+##  yob 
+## 1984
+```
+
+---
+class:inverse,middle,center
+# Try it yourself
+
+&lt;!-- badges: start --&gt;
+[![Launch Rstudio exercises](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/louisahsmith/math-summer-camp-19/master?urlpath=rstudio)
+&lt;!-- badges: end --&gt;
+
+## Open the file `exercises-1.R` and complete the exercises
+
+Remember to save and export your answers if you want to save them.
+---
+# What do these objects represent?
+
+It can help to visualize what these objects mean geometrically:
+
+Let's think of a vector of length 2, representing the age and height of participants 1 and 2:
+
+`\(\mathbf{x}_1 = \begin{bmatrix} 30 \\ 67 \end{bmatrix} \qquad \qquad \mathbf{x}_2 = \begin{bmatrix} 31 \\ 66.5 \end{bmatrix}\)`
+
+<div id="htmlwidget-917b0c9d60dce2073e5e" style="width:300px;height:300px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-917b0c9d60dce2073e5e">{"x":{"visdat":{"14183e61fe88":["function () ","plotlyVisDat"]},"cur_data":"14183e61fe88","attrs":{"14183e61fe88":{"x":{},"y":{},"mode":"markers","color":{},"size":[0.5,0.5,0,0],"colors":["red","white","blue"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"width":300,"height":300,"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"age"},"yaxis":{"domain":[0,1],"automargin":true,"title":"height"},"showlegend":false,"autosize":false,"hovermode":"closest"},"source":"A","config":{"showSendToCloud":false},"data":[{"x":[31],"y":[66.5],"mode":"markers","type":"scatter","name":"blue","marker":{"color":"rgba(255,0,0,1)","size":[100],"sizemode":"area","line":{"color":"rgba(255,0,0,1)"}},"textfont":{"color":"rgba(255,0,0,1)","size":100},"error_y":{"color":"rgba(255,0,0,1)","width":100},"error_x":{"color":"rgba(255,0,0,1)","width":100},"line":{"color":"rgba(255,0,0,1)","width":100},"xaxis":"x","yaxis":"y","frame":null},{"x":[25,35],"y":[60,70],"mode":"markers","type":"scatter","name":"clear","marker":{"color":"rgba(255,255,255,1)","size":[10,10],"sizemode":"area","line":{"color":"rgba(255,255,255,1)"}},"textfont":{"color":"rgba(255,255,255,1)","size":10},"error_y":{"color":"rgba(255,255,255,1)","width":10},"error_x":{"color":"rgba(255,255,255,1)","width":10},"line":{"color":"rgba(255,255,255,1)","width":10},"xaxis":"x","yaxis":"y","frame":null},{"x":[30],"y":[67],"mode":"markers","type":"scatter","name":"red","marker":{"color":"rgba(0,0,255,1)","size":[100],"sizemode":"area","line":{"color":"rgba(0,0,255,1)"}},"textfont":{"color":"rgba(0,0,255,1)","size":100},"error_y":{"color":"rgba(0,0,255,1)","width":100},"error_x":{"color":"rgba(0,0,255,1)","width":100},"line":{"color":"rgba(0,0,255,1)","width":100},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+
+---
+# Add another dimension
+
+.right-col[
+`\(\mathbf{x}_1 = \begin{bmatrix} 30 \\ 67 \\10.5 \end{bmatrix} \qquad \mathbf{x}_2 = \begin{bmatrix} 31 \\ 66.5 \\ 7 \end{bmatrix}\)`
+
+&lt;br&gt;
+&lt;br&gt;
+.center[
+#### The more attributes we measure about people, the higher-dimensional the space -- and the more precisely we can describe each person (they're not near anyone else in space).
+]
+]
+
+<div id="htmlwidget-97c534e0866c52485a8f" style="width:500px;height:500px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-97c534e0866c52485a8f">{"x":{"visdat":{"141833fac33b":["function () ","plotlyVisDat"]},"cur_data":"141833fac33b","attrs":{"141833fac33b":{"x":{},"z":{},"y":{},"mode":"markers","color":{},"size":[4,4,0,0],"colors":["red","white","blue"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"width":500,"height":500,"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"yaxis":{"title":"age"},"xaxis":{"title":"shoe size"},"zaxis":{"title":"height"},"camera":{"up":{"x":0,"y":0,"z":1},"eye":{"x":2.5,"y":0.1,"z":0.1},"center":{"x":0,"y":0,"z":0}}},"showlegend":false,"hovermode":"closest"},"source":"A","config":{"showSendToCloud":false},"data":[{"x":[7],"z":[66.5],"y":[31],"mode":"markers","type":"scatter3d","name":"blue","marker":{"color":"rgba(255,0,0,1)","size":[100],"sizemode":"area","line":{"color":"rgba(255,0,0,1)"}},"textfont":{"color":"rgba(255,0,0,1)","size":100},"error_y":{"color":"rgba(255,0,0,1)","width":100},"error_x":{"color":"rgba(255,0,0,1)","width":100},"line":{"color":"rgba(255,0,0,1)","width":100},"frame":null},{"x":[6,11],"z":[60,70],"y":[25,35],"mode":"markers","type":"scatter3d","name":"clear","marker":{"color":"rgba(255,255,255,1)","size":[10,10],"sizemode":"area","line":{"color":"rgba(255,255,255,1)"}},"textfont":{"color":"rgba(255,255,255,1)","size":10},"error_y":{"color":"rgba(255,255,255,1)","width":10},"error_x":{"color":"rgba(255,255,255,1)","width":10},"line":{"color":"rgba(255,255,255,1)","width":10},"frame":null},{"x":[10.5],"z":[67],"y":[30],"mode":"markers","type":"scatter3d","name":"red","marker":{"color":"rgba(0,0,255,1)","size":[100],"sizemode":"area","line":{"color":"rgba(0,0,255,1)"}},"textfont":{"color":"rgba(0,0,255,1)","size":100},"error_y":{"color":"rgba(0,0,255,1)","width":100},"error_x":{"color":"rgba(0,0,255,1)","width":100},"line":{"color":"rgba(0,0,255,1)","width":100},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+
+---
+# Multiplication
+
+When we multiply a scalar by a vector or a matrix, we can just do so element by element:
+
+`\(a\mathbf{y} = \begin{bmatrix} ay_1 \\ ay_2 \\ \vdots \\ ay_n \end{bmatrix} \qquad \qquad \qquad a\mathbf{X} = \begin{bmatrix} ax_{11} &amp; ax_{12} &amp; \cdots &amp; ax_{1p} \\ ax_{21} &amp; ax_{22} &amp; \cdots &amp; ax_{2p} \\ \vdots &amp;\vdots &amp; \ddots &amp; \vdots \\ ax_{n1} &amp; ax_{n2} &amp; \cdots &amp; ax_{np} \end{bmatrix}\)`
+
+.center[
+#### But multiplying vectors and matrices requires special rules
+]
+
+---
+
+# Vector &amp; matrix multiplication
+
+We can only multiply vectors of the same length, and we have to **transpose** one before we can do so.
+
+- Consider two vectors of length `\(p\)`, `\(\mathbf{b}\)` and `\(\mathbf{c}\)`:
+
+`\(\mathbf{b}^T\mathbf{c} = \begin{bmatrix} b_1 \\ b_2 \\ \vdots \\ b_p \end{bmatrix}^T \begin{bmatrix} c_1 \\ c_2 \\ \vdots \\ c_p \end{bmatrix} = \begin{bmatrix} b_1 &amp; b_2 &amp; \cdots &amp; b_p \end{bmatrix} \begin{bmatrix} c_1 \\ c_2 \\ \vdots \\ c_p \end{bmatrix}\)`
+
+`\(\qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad\qquad \qquad = b_1c_1 + b_2c_2 + \cdots + b_pc_p = \sum_{i = 1}^p b_ic_i\)`
+
+&lt;br&gt;
+
+.center[
+#### I think of this as "flopping" `\(\mathbf{c}\)` over directly on top of `\(\mathbf{b}\)`, and then summing all the products of the matching terms.
+]
+
+See why the vectors need to be the same length?
+
+---
+# Practice
+
+Let's consider two vectors of length 3, `\(\mathbf{v}\)` and `\(\mathbf{w}\)`:
+
+`\(\mathbf{v}^T\mathbf{w} = \begin{bmatrix} 2 \\ 4 \\ 3\end{bmatrix}^T \begin{bmatrix} 4 \\ 1 \\ 2 \end{bmatrix} = \begin{bmatrix} 2 &amp; 4 &amp; 3 \end{bmatrix} \begin{bmatrix} 4 \\ 1 \\ 2 \end{bmatrix} = \; \; ?\)`
+
+--
+
+`\(\qquad \qquad \qquad\qquad \qquad \qquad\qquad \qquad \qquad(2 \times 4) + (4 \times 1) + (3 \times 2) = 18\)`
+
+--
+
+&lt;br&gt;
+&lt;br&gt;
+
+.center[
+#### What is `\(\mathbf{w}^T\mathbf{v}\)`?
+]
+
+---
+# In "real life"
+
+One situation that occurs often in statistics is the product of a vector with itself:
+
+`\(\mathbf{b}^T\mathbf{b} = \sum_{i = 1}^p b_i^2\)`
+
+Matrix notation makes it easy to write down a sum of squares.
+
+
+---
+## In R
+.pull-left[
+Let's look at the two vectors (R prints them as rows but that's ok):
+
+```r
+v
+```
+
+```
+## [1] 2 4 3
+```
+
+```r
+w
+```
+
+```
+## [1] 4 1 2
+```
+We would hope to be able to multiply them... nope!
+
+```r
+v * w
+```
+
+```
+## [1] 8 4 6
+```
+#### Careful, this neither gives you an error message *nor* the right answer!
+]
+
+--
+
+.pull-right[
+Vector/ matrix multiplication in R requires a different operator: `%*%`
+
+
+```r
+t(v) %*% w
+```
+
+```
+##      [,1]
+## [1,]   18
+```
+We can see that we get the same answer when we reverse the order:
+
+```r
+t(w) %*% v
+```
+
+```
+##      [,1]
+## [1,]   18
+```
+]
+
+---
+
+# Vector `\(\times\)` matrix multiplication
+
+When we multiply a vector by a matrix, the same idea applies, only this time we have more rows or columns to sum over.
+
+`\(\mathbf{X}\mathbf{b} = \begin{bmatrix} x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1p} \\ x_{21} &amp; x_{22} &amp; \cdots &amp; x_{2p} \\ \vdots &amp;\vdots &amp; \ddots &amp; \vdots \\ x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np} \end{bmatrix} \begin{bmatrix} b_1 \\ b_2 \\ \vdots \\ b_p \end{bmatrix} = \begin{bmatrix} x_{11}b_1 + x_{12}b_2 + \cdots x_{1p}b_p  \\ x_{21}b_1 + x_{22}b_2 + \cdots x_{2p}b_p  \\ \vdots \\ x_{n1}b_1 + x_{n2}b_2 + \cdots x_{np}b_p \end{bmatrix}\)`
+
+We're **flopping** the column vector repeatedly onto the rows of the matrix, and summing the products that result.
+
+.center[
+![](img/flop.jpeg)
+]
+
+---
+# Vector `\(\times\)` matrix multiplication, cont.
+
+Let's look at some other ways we could write this same product:
+
+`\(\mathbf{X}\mathbf{b} = \begin{bmatrix} \mathbf{x_1}^T\mathbf{b}\\ \mathbf{x_2}^T\mathbf{b}\\ \vdots \\ \mathbf{x_n}^T\mathbf{b}\\ \end{bmatrix} = \begin{bmatrix} \sum_{i = 1}^p x_{1i}b_i\\ \sum_{i = 1}^p x_{2i}b_i\\ \vdots \\ \sum_{i = 1}^p x_{ni}b_i\\ \end{bmatrix}\)`
+
+&lt;br&gt;
+
+- The `\(\mathbf{x_1}^T\mathbf{b}\)` form illustrates how each **element** of the final product is just a **vector-vector product**
+
+- We're using the same `\(\mathbf{b}\)` vector in each new element of our product, but a different one of the `\(n\)` rows of `\(\mathbf{X}\)` 
+  - So we end up with `\(n\)` elements in the resulting vector
+  
+---
+## In R
+
+.pull-left[
+
+```r
+X
+```
+
+```
+##      [,1] [,2] [,3]
+## [1,]    6    1    2
+## [2,]    3    6    3
+```
+
+```r
+v
+```
+
+```
+## [1] 2 4 3
+```
+
+```r
+w
+```
+
+```
+## [1] 4 1 2
+```
+
+#### What will be the dimensions of `\(\mathbf{Xv}\)`?
+]
+
+--
+
+.pull-right[
+We have to use the `%*%` operator again:
+
+
+```r
+X %*% v
+```
+
+```
+##      [,1]
+## [1,]   22
+## [2,]   39
+```
+
+```r
+X %*% w
+```
+
+```
+##      [,1]
+## [1,]   29
+## [2,]   24
+```
+]
+
+---
+
+# Matrix `\(\times\)` matrix multiplication
+
+Let's multiply a `\(m\times n\)` matrix `\(\mathbf{Y}\)` by the `\(n\times p\)` matrix `\(\mathbf{X}\)`:
+
+`\(\mathbf{Y}_{m\times n}\mathbf{X}_{n\times p} = \begin{bmatrix} \mathbf{y_{11}} &amp; \mathbf{y_{12}} &amp; \cdots &amp; \mathbf{y_{1n}} \\ y_{21} &amp; y_{22} &amp; \cdots &amp; y_{2n} \\ \vdots &amp;\vdots &amp; \ddots &amp; \vdots \\ y_{m1} &amp; y_{m2} &amp; \cdots &amp; y_{mn} \end{bmatrix} \begin{bmatrix} \mathbf{x_{11}} &amp; x_{12} &amp; \cdots &amp; x_{1p} \\ \mathbf{x_{21}} &amp; x_{22} &amp; \cdots &amp; x_{2p} \\ \vdots &amp;\vdots &amp; \ddots &amp; \vdots \\ \mathbf{x_{n1}} &amp; x_{n2} &amp; \cdots &amp; x_{np}\end{bmatrix} = \begin{bmatrix} \mathbf{z_{11}} &amp;  &amp; \cdots &amp;  \\ &amp;  &amp; \cdots &amp; \\ \vdots &amp;\vdots &amp; \ddots &amp; \vdots \\  &amp;  &amp; \cdots &amp;\end{bmatrix}\)`
+
+where `\(\mathbf{z}_{11}\)` is the product of the first **row** of `\(\mathbf{Y}\)` and the first **column** of `\(\mathbf{Y}\)`
+
+&lt;br&gt;
+
+.center[
+#### Now we need to lift out a single column vector before flopping
+]
+
+---
+# Rinse and repeat
+Now we do the same vector-vector multiplication with every pair of a row from `\(\mathbf{Y}\)` and a column from `\(\mathbf{X}\)`
+
+
+`\(\mathbf{Y}_{m\times n}\mathbf{X}_{n\times p} = \begin{bmatrix} \mathbf{y_{11}} &amp; \mathbf{y_{12}} &amp; \cdots &amp; \mathbf{y_{1n}} \\ y_{21} &amp; y_{22} &amp; \cdots &amp; y_{2n} \\ \vdots &amp;\vdots &amp; \ddots &amp; \vdots \\ y_{m1} &amp; y_{m2} &amp; \cdots &amp; y_{mn} \end{bmatrix} \begin{bmatrix} x_{11} &amp; \mathbf{x_{12}} &amp; \cdots &amp; x_{1p} \\ x_{21} &amp; \mathbf{x_{22}} &amp; \cdots &amp; x_{2p} \\ \vdots &amp;\vdots &amp; \ddots &amp; \vdots \\ x_{n1} &amp; \mathbf{x_{n2}} &amp; \cdots &amp; x_{np} \end{bmatrix} = \begin{bmatrix} z_{11} &amp; \mathbf{z_{12}} &amp; \cdots &amp;  \\ &amp;  &amp; \cdots &amp; \\ \vdots &amp;\vdots &amp; \ddots &amp; \vdots \\ &amp;  &amp; \cdots &amp; \end{bmatrix}\)`
+
+(You don't have to do it in any particular order, just keep multiplying until all row-column pairs have been multiplied.)
+
+`\(\qquad \qquad \; \; \; \,= \begin{bmatrix} y_{11} &amp; y_{12} &amp; \cdots &amp; y_{1n} \\ \mathbf{y_{21}} &amp; \mathbf{y_{22}} &amp; \cdots &amp; \mathbf{y_{2n}} \\ \vdots &amp;\vdots &amp; \ddots &amp; \vdots \\ y_{m1} &amp; y_{m2} &amp; \cdots &amp; y_{mn} \end{bmatrix} \begin{bmatrix} \mathbf{x_{11}} &amp; x_{12} &amp; \cdots &amp; x_{1p} \\ \mathbf{x_{21}} &amp; x_{22} &amp; \cdots &amp; x_{2p} \\ \vdots &amp;\vdots &amp; \ddots &amp; \vdots \\ \mathbf{x_{n1}} &amp; x_{n2} &amp; \cdots &amp; x_{np} \end{bmatrix} = \begin{bmatrix} z_{11} &amp; z_{12} &amp; \cdots &amp;  \\ \mathbf{z_{21}} &amp;  &amp; \cdots &amp; \\ \vdots &amp;\vdots &amp; \ddots &amp; \vdots \\  &amp;  &amp; \cdots &amp; \end{bmatrix}\)`
+
+.center[
+#### What will be the dimensions of `\(\mathbf{Z}\)`?
+]
+
+---
+## (Note on dimensions)
+
+Notice that I explicitly wrote out the dimensions when multiplying `\(\mathbf{Y}_{m\times n}\mathbf{X}_{n\times p}\,\)`
+
+Just like we can only multiply vectors of the same length, dimensions of matrices must be compatible in order to be multiplied.
+
+.center[
+&lt;iframe src="https://giphy.com/embed/ZDgXvr2vpsgZG" width="480" height="257" frameBorder="0" class="giphy-embed" allowFullScreen&gt;&lt;/iframe&gt;&lt;p&gt;&lt;a href="https://giphy.com/gifs/ZDgXvr2vpsgZG"&gt;&lt;/a&gt;&lt;/p&gt;
+]
+
+The **inner dimensions** must match, then the resulting product is a matrix with the **outer dimensions**.
+
+.center[
+#### I think of this as the inner dimensions "collapsing"
+]
+
+---
+# Multiplying matrices by themselves
+
+As with vectors, we sometime need to transpose matrices to make the dimensions compatible.
+
+Let's look at a new matrix `\(\mathbf{Q}_{2\times3}\)`:
+
+`\(\mathbf{Q} = \begin{bmatrix} r &amp; s &amp; t \\ u &amp; v &amp; w \end{bmatrix} \qquad \qquad \qquad \mathbf{Q}^T = \begin{bmatrix} r &amp; u \\ s &amp; v \\ t &amp; w \end{bmatrix}\)`
+
+If we wanted to multiply `\(\mathbf{Q}\)` by itself (similar to squaring a number), we can't just multiply `\(\mathbf{QQ}\)` -- first we need to transpose one of the matrices to make the dimensions compatible:
+
+`\(\mathbf{Q}^T\mathbf{Q} = \begin{bmatrix} r^2 + u^2 &amp; rs + uv &amp; rt + uw \\ rs + uv &amp; s^2 + v^2 &amp; st + vw \\ rt + uw &amp; st + vw &amp; t^2 + w^2 \end{bmatrix}\)`
+
+.center[
+#### What would be the dimensions of `\(\mathbf{Q}\mathbf{Q}^T\)`?
+]
+
+---
+class:inverse,middle,center
+# Try it yourself
+
+&lt;!-- badges: start --&gt;
+[![Launch Rstudio exercises](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/louisahsmith/math-summer-camp-19/master?urlpath=rstudio)
+&lt;!-- badges: end --&gt;
+
+
+## Open the file `exercises-2.R` and complete the exercises
+
+Remember to save and export your answers if you want to save them.
+
+---
+# Identity matrix
+
+We all know 1 is special. When you multiply a number by 1, you get the same number.
+
+Matrices have their own special matrix, the identity matrix: `\(\mathbf{I}\)`.
+
+.center[
+`\(\mathbf{XI} = \mathbf{X} \text{ for any matrix } \mathbf{X}\)`
+]
+
+&lt;br&gt;
+
+What does `\(\mathbf{I}\)` look like? Let's look at what it would look like for `\(\mathbf{Q}_{2\times3}\)`.
+
+.center[
+#### What are the dimensions of `\(\mathbf{I}\)`?
+]
+
+--
+
+`\(\mathbf{QI} = \begin{bmatrix} r &amp; s &amp; t \\ u &amp; v &amp; w \end{bmatrix}_{2\times3}\begin{bmatrix}   &amp;   &amp;  &amp;  \\    &amp;   &amp;   &amp; \\   &amp;   &amp;  &amp;  \\ \end{bmatrix}_{3\times3} = \begin{bmatrix} r &amp; s &amp; t \\ u &amp; v &amp; w \end{bmatrix}_{2\times3}\)`
+
+.center[
+#### What could we put in the first column of `\(\mathbf{I}\)` that would result in `\(r\)` when multiplied by the first row of `\(\mathbf{Q}\)`? What would result in `\(s\)`, for the second column?
+]
+
+---
+
+# Identity matrix revealed
+.pull-left[
+`\(\mathbf{I} = \begin{bmatrix} 1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; 1 &amp; 0 \cdots &amp; 0 \\ \vdots &amp;\vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; 1 \end{bmatrix}\)`
+
+#### What are the dimensions of `\(\mathbf{I}\)`?
+]
+
+.pull-right[
+&lt;iframe src="https://giphy.com/embed/6FzSjyMdrPm0M" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen&gt;&lt;/iframe&gt;&lt;p&gt;&lt;a href="https://giphy.com/gifs/the-oc-ryan-6FzSjyMdrPm0M"&gt;&lt;/a&gt;&lt;/p&gt;
+]
+
+---
+# Symmetric matrices
+
+The identity matrix `\(\mathbf{I}\)` is an example of a **symmetric** matrix.
+
+&lt;br&gt;
+
+The `\(\mathbf{Q}^T\mathbf{Q}\)` matrix we saw earlier was as well:
+
+.center[
+`\(\mathbf{Q}^T\mathbf{Q} = \begin{bmatrix} r^2 + u^2 &amp; rs + uv &amp; rt + uw \\ rs + uv &amp; s^2 + v^2 &amp; st + vw \\ rt + uw &amp; st + vw &amp; t^2 + w^2 \end{bmatrix}\)`
+]
+
+&lt;br&gt;
+
+- The element in the `\(1,2\)` position is the same as that in the `\(2,1\)` position, the element in the `\(1,3\)` position is the same as that in the `\(3,1\)` position, and so on
+- The diagonal can be anything (1s for `\(\mathbf{I}\)`, and sums of squares for `\(\mathbf{Q}^T\mathbf{Q}\)`)
+
+.center[
+#### Correlation and covariance matrices are always symmetric
+]
+
+---
+# Matrix inverses
+
+An inverse of a function is kind of like the function that takes you back to some starting point.
+
+- For a scalar `\(a\)`, `\(a^{-1}=\frac{1}{a}\)` is the multiplicative inverse of `\(a\)`: when we multiply the two together, we get 1
+
+- For a square matrix `\(\mathbf{X}\)`, there *sometimes* exists an **inverse matrix** `\(\mathbf{X}^{-1}\)` such that `\(\mathbf{X}^{-1}\mathbf{X} = \mathbf{I}\)` and `\(\mathbf{X}\mathbf{X}^{-1} = \mathbf{I}\)`
+
+&lt;br&gt;
+
+.center[
+#### It can be tricky to find, and it doesn't always exist!
+]
+
+&lt;br&gt;
+
+In particular, if the row vectors or column vectors that make up `\(\mathbf{X}\)` are not **linearly independent**, then the inverse `\(\mathbf{X}^{-1}\)` doesn't exist. 
+
+---
+# Intuition behind linear independence
+
+Consider a situation in which we're predicting height as a linear function of several variables we have in our dataset: age in years, shoe size, and age in months.
+
+.center[
+
+`\(\textbf{height} = \begin{bmatrix} 51 \\ 61 \\ 52 \\ 65 \\ 60 \\ 48 \end{bmatrix} \qquad \qquad \textbf{other variables} = \begin{bmatrix} 30  &amp; 7 &amp; 1989 \\ 31 &amp; 10 &amp; 1988 \\ 25 &amp; 9 &amp; 1994 \\ 35 &amp; 10 &amp; 1984 \\ 42 &amp; 6 &amp; 1977 \\ 27 &amp; 7 &amp; 1992 \end{bmatrix}\)`
+
+]
+
+.pull-left[
+We can plot predicted height as a function of age in years alone. This is a line.
+]
+
+.pull-right[
+
+.center[
+
+<div id="htmlwidget-1bfd6adcfaced3986267" style="width:250px;height:250px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1bfd6adcfaced3986267">{"x":{"visdat":{"141866d01ed5":["function () ","plotlyVisDat"]},"cur_data":"141866d01ed5","attrs":{"141866d01ed5":{"x":{},"y":{},"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"},"141866d01ed5.1":{"x":{},"y":{},"mode":"lines","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","color":["lightgrey"],"inherit":true}},"layout":{"width":250,"height":250,"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"age in years"},"yaxis":{"domain":[0,1],"automargin":true,"title":"predicted height"},"showlegend":false,"autosize":false,"hovermode":"closest"},"source":"A","config":{"showSendToCloud":false},"data":[{"x":[30,31,25,35,42,27],"y":[54.9181494661922,55.6672597864769,51.1725978647687,58.6637010676157,63.9074733096085,52.6708185053381],"mode":"markers","type":"scatter","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[25,27,30,31,35,42],"y":[51.1725978647687,52.6708185053381,54.9181494661922,55.6672597864769,58.6637010676157,63.9074733096085],"mode":"lines","type":"scatter","marker":{"color":"rgba(211,211,211,1)","line":{"color":"rgba(211,211,211,1)"}},"textfont":{"color":"rgba(211,211,211,1)"},"error_y":{"color":"rgba(211,211,211,1)"},"error_x":{"color":"rgba(211,211,211,1)"},"line":{"color":"rgba(211,211,211,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+]
+
+]
+
+---
+# Linear independence, cont.
+
+.pull-left[
+If we plot predicted height as a function of age in years *and* shoe size, we get a **plane**.
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+That is, we get more information about height from knowing someone's shoe size. If two people are the same age, but have different shoe sizes, we'll predict different heights for them.
+]
+
+.pull-right[
+.center[
+
+<div id="htmlwidget-3ed1330c82c6ca6570dc" style="width:500px;height:500px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3ed1330c82c6ca6570dc">{"x":{"visdat":{"14182d456a9d":["function () ","plotlyVisDat"]},"cur_data":"14182d456a9d","attrs":{"14182d456a9d":{"x":{},"z":{},"y":{},"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"},"14182d456a9d.1":{"x":{},"z":{},"y":{},"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"surface","colorscale":[[0,1],["lightgrey","lightgrey"]],"inherit":true}},"layout":{"width":500,"height":500,"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"yaxis":{"title":"age in years"},"xaxis":{"title":"shoe size"},"zaxis":{"title":"predicted height"},"camera":{"up":{"x":0,"y":0,"z":1},"eye":{"x":2.5,"y":0.01,"z":0.2},"center":{"x":0,"y":0,"z":0.2}}},"showlegend":false,"hovermode":"closest"},"source":"A","config":{"showSendToCloud":false},"data":[{"x":[7,10,9,10,6,7],"z":[51,61,52,65,60,48],"y":[30,31,25,35,42,27],"mode":"markers","type":"scatter3d","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"},"showscale":false},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null},{"colorbar":{"title":"p_age_shoe<br />m_shoes","ticklen":2},"colorscale":[[0,"lightgrey"],[1,"lightgrey"]],"showscale":false,"x":[7,10,9,6],"z":[[51,60,57,48],[52,61,58,49],[46,55,52,43],[56,65,62,53],[63,72,69,60],[48,57,54,45]],"y":[30,31,25,35,42,27],"mode":"markers","type":"surface","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+]
+]
+
+
+---
+# Linear dependence
+
+.pull-left[
+But if we plot predicted height as a function of age in years and *age in months*, we get a line again, instead of a plane.
+
+&lt;br&gt;
+&lt;br&gt;
+
+
+That's because age in years and age in months are **linearly dependent**: we can write one as a linear combination of the others; that is, age in months = 12 `\(\times\)` age in years.
+
+We don't get any extra information from knowing age in months that we didn't already have from age in years.
+]
+
+.pull-right[
+.center[
+<div id="htmlwidget-604e2495268399a91ae2" style="width:500px;height:500px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-604e2495268399a91ae2">{"x":{"visdat":{"141850a1d4d7":["function () ","plotlyVisDat"]},"cur_data":"141850a1d4d7","attrs":{"141850a1d4d7":{"x":{},"z":{},"y":{},"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"},"141850a1d4d7.1":{"x":{},"z":{},"y":{},"mode":"lines","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d","color":["lightgrey"],"inherit":true}},"layout":{"width":500,"height":500,"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"yaxis":{"title":"age in years"},"xaxis":{"title":"age in months"},"zaxis":{"title":"height"},"camera":{"up":{"x":0,"y":0,"z":1},"eye":{"x":2.5,"y":0.01,"z":0.2},"center":{"x":0,"y":0,"z":0.2}}},"showlegend":false,"hovermode":"closest"},"source":"A","config":{"showSendToCloud":false},"data":[{"x":[360,372,300,420,504,324],"z":[54.9181494661922,55.6672597864769,51.1725978647687,58.6637010676157,63.9074733096085,52.6708185053381],"y":[30,31,25,35,42,27],"mode":"markers","type":"scatter3d","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null},{"x":[300,324,360,372,420,504],"z":[51.1725978647687,52.6708185053381,54.9181494661922,55.6672597864769,58.6637010676157,63.9074733096085],"y":[25,27,30,31,35,42],"mode":"lines","type":"scatter3d","marker":{"color":"rgba(211,211,211,1)","line":{"color":"rgba(211,211,211,1)"}},"textfont":{"color":"rgba(211,211,211,1)"},"error_y":{"color":"rgba(211,211,211,1)"},"error_x":{"color":"rgba(211,211,211,1)"},"line":{"color":"rgba(211,211,211,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+]
+]
+
+.center[
+#### When else do you think linear dependence might be a problem?
+]
+
+---
+# In "real life"
+
+Linear dependence will come into play when we cover regression. In the meantime, we can practice some regression matrix notation! You may be used to seeing a linear regression equation written out like this:
+
+.center[
+`\(y_i = \beta_0 + \beta_1x_{1i} +\beta_1x_{2i} + \epsilon_i\)`
+]
+
+Well, that's the same thing as:
+
+.center[
+`\(y_i = \boldsymbol{\beta}^T\mathbf{x}_i + \epsilon_i\)`
+]
+
+where
+`\(\;\boldsymbol{\beta} = \begin{bmatrix} \beta_0 \\ \beta_1 \\ \beta_2 \end{bmatrix}\;\)` and `\(\;\mathbf{x}_i = \begin{bmatrix} 1 \\ x_{1i} \\ x_{2i} \end{bmatrix}\)`
+
+&lt;br&gt;
+
+.center[
+#### Try multiplying it out by hand, first making sure the dimensions are compatible, to be sure!
+]
+
+You'll review more regression material on Friday 😁
+
+---
+# In R
+.pull-left[
+We can attempt to invert a matrix using the `solve()` function:
+
+
+
+```r
+mat_a
+```
+
+```
+##      [,1] [,2]
+## [1,]    2    1
+## [2,]    6    8
+```
+
+```r
+solve(mat_a)
+```
+
+```
+##      [,1] [,2]
+## [1,]  0.8 -0.1
+## [2,] -0.6  0.2
+```
+]
+
+
+.pull-right[
+
+We can check to make sure this is the inverse:
+
+
+```r
+mat_a_inv &lt;- solve(mat_a)
+mat_a_inv %*% mat_a
+```
+
+```
+##      [,1] [,2]
+## [1,]    1    0
+## [2,]    0    1
+```
+#### We get the identity matrix `\(\mathbf{I}\)`!
+]
+
+---
+# In R, cont.
+
+What if we have a matrix whose columns are not linearly independent?
+
+
+
+
+```r
+mat_b
+```
+
+```
+##      [,1] [,2]
+## [1,]    2    1
+## [2,]    6    3
+```
+
+```r
+solve(mat_b)
+```
+
+```
+## Error in solve.default(mat_b): Lapack routine dgesv: system is exactly singular: U[2,2] = 0
+```
+
+#### Whenever you get an error message about something being "singular", that's code for a matrix not being invertible -- check for linear dependence! 
+
+How could you tell the matrix above is not invertible?
+
+
+---
+class:middle
+
+background-image: url("img/resources.jpg")
+
+background-size:cover
+
+
+# More resources
+
+.pull-left[
+
+[**This**](https://www.khanacademy.org/math/precalculus/precalc-matrices) whole section has a lot of great information and practice with matrices. 
+
+For a more advanced introduction, work through the sections on vectors, linear combinations, and linear dependence [**here**](https://www.khanacademy.org/math/linear-algebra/vectors-and-spaces). 
+
+You can also pick and choose from the videos [**here**](https://www.khanacademy.org/math/linear-algebra/matrix-transformations), particularly those on functions and linear transformations.
+]
+
+---
+class:middle, center
+# Index card:
+
+## 2. How confident are you feeling about vectors and matrices?
+### 1 = no confidence, 5 = very confident
+
+---
+class: inverse, middle, center
+
+# How we transform data
+
+## Functions
+
+---
+# Logarithms
+
+.left-code[
+If you see `\(\log(x)\)` in this class, or basically anywhere in probability and statistics, it will refer to the natural logarithm, or `\(\ln(x)\)`.
+
+#### What do you notice about the function `\(\log(x)\)`?
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+You can only "log" a positive number. Something like `\(\log(-1)\)` is undefined. We can see that `\(\lim_{x \to 0}\log(x) = -\infty\)`. Importantly, `\(\log(1) = 0\)`, so `\(\log(x)\)` for any `\(x\)` between 0 and 1 will give you a negative number.
+]
+
+.right-plot[
+
+&lt;img src="Math_files/figure-html/logGraph-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Exponentiation
+.left-code[
+The **inverse** of the natural log is the natural expontial function `\(e^x\)`, which we also write as `\(\exp(x)\)`:
+
+.center[
+`\(\exp(x) = y \iff x = \log(y)\)`
+]
+
+so if one side of an equation is exponentiated, we can always "get out of it" by applying a logarithm to both sides, and vice versa.
+
+.center[
+`\(\log(\exp(x)) = x\;\)` and `\(\;\exp(\log(x)) = x\)`
+]
+
+#### But we can't do that if x is negative! Recall that we can't take a log of a negative number, and exponentiating a number is never going to give us anything negative.
+]
+
+.right-plot[
+
+&lt;img src="Math_files/figure-html/expGraph-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Rules to live by
+
+When we have a sum inside an exponent, we can decompose this into the product of two exponents:
+`$$\exp(a + b) = \exp(a)\exp(b)$$`
+Similarly, a product inside a logarithm can be written as a sum of logs:
+`$$\log(ab) = \log(a) + \log(b)$$`
+Of course, the same is true of the inverses of addition and multiplication, subtraction and division:
+`$$\exp(a - b) = \frac{\exp(a)}{\exp(b)}$$`
+`$$\log\left(\frac{a}{b}\right) = \log(a) - \log(b)$$`
+
+#### You will need to know these rules to understand various regression models in this class, I promise!
+
+---
+# Odds and probabilities
+.pull-left[
+Another important relationship! Think about flipping a coin lots of times: heads you win, tails you lose.
+
+- A **probability** describes the number of successes out of the total number of trials (a proportion)
+- An **odds** describes the number of successes compared the the number of failures (a ratio)
+
+Let's say you get 4 heads out of 10 flips:
+
+- probability = `\(\frac{4}{10}\)`
+- odds = `\(\frac{4}{6}\)`
+
+#### These are really different numbers!
+
+]
+
+.pull-right[
+![](https://i0.wp.com/harvardsportsanalysis.org/wp-content/uploads/2015/11/CTAVzLbVAAAVm7B.jpg-large.jpg?w=1024)
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+.center[
+`\(odds = \frac{prob}{1 - prob}\)`
+
+
+`\(prob = \frac{odds}{1 + odds}\)`
+]
+]
+
+---
+# Logits and expits
+.pull-left[
+Now let's combine everything to make... the **logit** function!
+
+![](img/recipe.gif)
+]
+
+.pull-right[
+
+The **logit** of `\(p\)`, aka the **log-odds** of `\(p\)`, can take a number between 0 and 1 (like a probability!) and transform it to a number between `\(-\infty\)` and `\(\infty\)`.
+
+.center[
+`\(logit(p) = \log\left(\frac{p}{1 - p}\right)\)`
+]
+
+We can invert it to get the **expit** function, which can take any number on the real line and transform it to a value between 0 and 1:
+
+.center[
+`\(expit(x) = \frac{\exp(x)}{1 + \exp(x)}\)`
+]
+
+]
+
+---
+# In real life
+
+Consider the following logistic regression model for the probability that someone likes dogs ( `\(p_i\)` ) given their age in years ( `\(x_i\)` ):
+
+`\(\log\left(\frac{p_i}{1-p_i}\right) = \beta_0 + \beta_1x_i\)`
+
+#### What's the probability that a 30-year-old likes dogs?
+
+--
+
+.pull-left[
+.center[
+
+`\(\log\left(\frac{p_i}{1-p_i}\right) = \beta_0 + \beta_1\times30\)`
+
+`\(\frac{p_i}{1-p_i} = \exp\left(\beta_0 + \beta_1\times30\right)\)`
+
+`\(p_i = \frac{\exp\left(\beta_0 + \beta_1\times30\right)}{1 + \exp\left(\beta_0 + \beta_1\times30\right)}\)`
+]
+]
+
+.pull-right[
+![](https://hips.hearstapps.com/ghk.h-cdn.co/assets/17/30/1500925839-golden-retriever-puppy.jpg)
+]
+
+---
+# In real life, cont.
+
+Consider the following logistic regression model for the probability that someone likes dogs ( `\(p_i\)` ) given their age in years ( `\(x_i\)` ):
+
+`\(\log\left(\frac{p_i}{1-p_i}\right) = \beta_0 + \beta_1x_i\)`
+
+
+#### What's the odds ratio for a 5-year difference in age?
+
+--
+
+.pull-left[
+.center[
+
+`\(\frac{p_i}{1-p_i} = \exp\left(\beta_0 + \beta_1\times30\right)\)`
+
+`\(\frac{p_j}{1-p_j} = \exp\left(\beta_0 + \beta_1\times35\right)\)`
+
+`\(\frac{p_j}{1-p_j} \bigg/ \frac{p_i}{1-p_i} = \frac{\exp\left(\beta_0 + \beta_1\times35\right)}{\exp\left(\beta_0 + \beta_1\times30\right)}\)`
+
+`\(\qquad\qquad\qquad\qquad= \frac{\exp(\beta_0)\exp(\beta_1\times35)}{\exp(\beta_0)\exp(\beta_1\times30)}\)`
+
+`\(\qquad\qquad\qquad\qquad= \exp(\beta_1\times5)\)`
+]
+]
+
+
+.pull-right[
+![](https://d17fnq9dkz9hgj.cloudfront.net/uploads/2018/04/Beagle_02.jpg)
+]
+
+---
+
+class:inverse,middle,center
+# Try it yourself
+
+&lt;!-- badges: start --&gt;
+[![Launch Rstudio exercises](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/louisahsmith/math-summer-camp-19/master?urlpath=rstudio)
+&lt;!-- badges: end --&gt;
+
+## Open the file `exercises-3.R` and complete the exercises
+
+Remember to save and export your answers if you want to save them.
+---
+class:middle
+
+background-image: url("img/resources.jpg")
+
+background-size:cover
+
+
+# More resources
+
+.pull-left[
+Start [**here**](https://www.khanacademy.org/math/pre-algebra/pre-algebra-exponents-radicals/pre-algebra-exponent-properties/v/exponent-properties-involving-products) if you need more practice with exponents.
+
+Try [**here**](https://www.khanacademy.org/math/algebra2/exponential-and-logarithmic-functions) for more practice with logarithms.
+]
+
+---
+class:middle, center
+# Index card:
+
+## 3. How confident are you feeling about these types of functions?
+### 1 = no confidence, 5 = very confident
+
+---
+class: inverse, middle, center
+
+# How we analyze data
+
+## Calculus
+
+---
+
+# Derivatives
+
+.left-code[
+The basic idea of a derivative is that it describes the rate of change of a function. If the function we're looking at is `\(g(x)\)`, then there are a couple of ways we usually notate the first derivative of `\(g(x)\)`, which we'll use interchangeably:
+`$$g'(x) = \frac{d}{dx}g(x)$$`
+Both equivalently tell us that we are looking at the function `\(g(x)\)` and taking the first derivative with respect to the variable `\(x\)`. That means that as `\(x\)` changes, we want to know how much `\(g(x)\)` changes. This is just the slope of `\(g(x)\)` at a given value of `\(x\)`.
+]
+
+.right-plot[
+.center[
+
+#### Where is `\(g'(x)\)` greatest?
+
+&lt;img src="Math_files/figure-html/slope1-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+]
+
+---
+
+# More derivatives
+.left-code[
+.center[
+#### Where is `\(g'(x)\)` greatest?
+
+&lt;img src="Math_files/figure-html/slope2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+]
+
+--
+
+.right-plot[
+#### Where does `\(g'(x) = 0\)`?
+
+When the first derivative is 0, the function may have reached its maximum or minimum.
+
+So if you want to maximize a function, one way to do so is to differentiate it and then set it equal to 0.
+]
+
+---
+# Integrals
+
+.left-code[
+We might want to describe a function by the area under its curve
+
+An integral tells us how much cumulative space a function is covering (in terms of distance from the `\(x\)`-axis) as `\(x\)` gets larger.
+]
+
+.right-plot[
+In the graph of `\(f(x) = 2x^3 + 3x^2 + 4\)` below, the area in blue is represented by the integral
+`$$\int_{-2}^{2} 2x^3 + 3x^2 + 4 \; dx$$`
+&lt;img src="Math_files/figure-html/index-3-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Integrals, cont.
+
+.left-code[
+`$$\int_{-2}^{2} 2x^3 + 3x^2 + 4 \; dx$$`
+
+The values at the top and bottom of the integral sign are those between which we're computing the integral. We could integrate over the whole function, from `\(- \infty\)` to `\(\infty\)`, or choose other limits of integration:
+
+
+&lt;img src="Math_files/figure-html/unnamed-chunk-27-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+#### What limits of integration are displayed here?
+]
+
+.right-plot[
+
+The integral of a non-negative function increases with `\(x\)`:
+
+`$$\int_{-2}^{-1} 2x^3 + 3x^2 + 4 \; dx$$`
+
+`$$\leq \int_{-2}^{0} 2x^3 + 3x^2 + 4 \; dx$$`
+
+`$$\leq\int_{-2}^{1} 2x^3 + 3x^2 + 4 \; dx$$`
+
+`$$\leq \int_{-2}^{2} 2x^3 + 3x^2 + 4 \; dx$$`
+
+and so on. On the graph, the area under the curve can only accumulate area, so the integral evaluated at greater and greater upper limits can only increase.
+
+]
+
+---
+# In "real life"
+
+.left-code[
+At any given year of age, everyone still alive has some probability of dying.
+
+Yearly risk of mortality changes over time; in particular, there's a spike within the first year of life, and then a constant increase through and after middle age.
+]
+
+.right-plot[
+If we're interested in cumulative risk of death by some age, we'll have to **integrate** over the yearly risk from birth to that age.
+
+![](https://www150.statcan.gc.ca/n1/pub/82-624-x/2014001/article/14009/c-g/c-g-02-eng.gif)
+]
+
+---
+class:middle
+
+background-image: url("img/resources.jpg")
+
+background-size:cover
+
+
+# More resources
+
+.pull-left[
+[**Here**](https://www.khanacademy.org/math/calculus-home/taking-derivatives-calc) is a **lot** of information about derivatives. You don't need more than the first few videos.
+
+Same with [**this**](https://www.khanacademy.org/math/calculus-home/integral-calculus/definite-integrals-intro-ic) intro to integrals. 
+
+Watch the video on antiderivatives and indefinite integrals from [**this**](https://www.khanacademy.org/math/calculus-home/integral-calculus/indefinite-integrals) page and some of those on [**this**](https://www.khanacademy.org/math/calculus-home/integral-calculus/fundamental-theorem-of-calculus-ic) page to understand the link between derivatives and integrals.
+]
+
+
+---
+class:middle, center
+# Index card:
+
+## 4. How confident are you feeling about calculus intuition?
+### 1 = no confidence, 5 = very confident
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
